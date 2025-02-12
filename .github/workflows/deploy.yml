@@ -14,15 +14,40 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout your repository using git
-        uses: actions/checkout@v4
-      - name: Install, build, and upload your site
-        #uses: darallium/astro-action@main
-        uses: withastro/action@v3
+      - name: Checkout
+        uses: actions/checkout@v4.1.6
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4.0.2
         with:
-          path: . # リポジトリ内のAstroプロジェクトのルートロケーション。(オプション)
-          node-version: 18 # サイト構築に使用するNodeのバージョン。デフォルトは18です。（オプション）
-          package-manager: pnpm@latest # 依存関係のインストールとサイトのビルドに使用する Node パッケージマネージャ。ロックファイルに基づいて自動的に検出されます。(オプション)
+          node-version: 20
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: package.json
+
+      - name: Install packages
+        working-directory: .
+        run: pnpm install
+
+      - name: Build
+        working-directory: .
+        run: pnpm run build
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3.0.1
+        with:
+          path: "dist/"
+            #- name: Checkout your repository using git
+            #  uses: actions/checkout@v4
+            #- name: Install, build, and upload your site
+            #  #uses: darallium/astro-action@main
+            #  uses: withastro/action@v3
+            #  with:
+            #    path: . # リポジトリ内のAstroプロジェクトのルートロケーション。(オプション)
+            #    node-version: 18 # サイト構築に使用するNodeのバージョン。デフォルトは18です。（オプション）
+            #    package-manager: pnpm@latest # 依存関係のインストールとサイトのビルドに使用する Node パッケージマネージャ。ロックファイルに基づいて自動的に検出されます。(オプション)
 
   deploy:
     needs: build
