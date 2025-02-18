@@ -13,7 +13,9 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://rippro.github.io',
+  // https://darallium.github.io/rippro.github.io/
+  site: 'https://darallium.github.io',
+  base: '/rippro.github.io',
   integrations: [
     tailwind({
       nesting: true
