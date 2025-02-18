@@ -9,12 +9,12 @@ pathSegments.forEach((seg) => {
 <div id="navbar-breadcrumb">
   <nav id="breadcrumb" aria-label="Breadcrumb">
     <span class="flex-3">
-      <a href="/">Home</a>
+      <a href="/rippro.github.io/">Home</a>
     </span>
     {
       pathSegments.map((segment, index) => (
         <span>
-          <a href={`/${pathSegments.slice(0, index + 1).join('/') + '/'}`}>{segment}</a>
+          <a href={`/rippro.github.io/${pathSegments.slice(0, index + 1).join('/') + '/'}`}>{segment}</a>
         </span>
       ))
     }
